@@ -15,7 +15,7 @@ interface StackParamList extends ParamListBase {
       id: number;
       title: string;
       price: number;
-      image: any;
+      images: any;
     };
   };
 }

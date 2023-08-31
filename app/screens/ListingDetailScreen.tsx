@@ -1,4 +1,5 @@
-import { Image, StyleSheet, View } from "react-native";
+import { StyleSheet, View } from "react-native";
+import { Image } from "expo-image";
 import React from "react";
 
 import BaseText from "../components/ui/base-text";
@@ -10,11 +11,16 @@ export default function ListingDetailScreen({
   route,
 }: ListingDetailScreenProps) {
   const { item } = route.params;
-  const { image, title, price } = item;
+  const { images, title, price } = item;
 
   return (
     <View>
-      <Image source={image} style={styles.image} />
+      <Image
+        source={{
+          uri: images[0].url,
+        }}
+        style={styles.image}
+      />
       <View style={styles.content}>
         <BaseText style={styles.title}>{title}</BaseText>
         <BaseText style={styles.subTitle}>${price}</BaseText>
@@ -39,7 +45,7 @@ const styles = StyleSheet.create({
   },
   image: {
     width: "100%",
-    maxHeight: 300,
+    height: 300,
   },
   subTitle: {
     color: colors.secondary,

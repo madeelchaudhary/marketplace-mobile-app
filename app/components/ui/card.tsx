@@ -1,10 +1,5 @@
-import {
-  Image,
-  ImageSourcePropType,
-  Pressable,
-  StyleSheet,
-  View,
-} from "react-native";
+import { Pressable, StyleSheet, View } from "react-native";
+import { Image } from "expo-image";
 import React from "react";
 
 import colors from "../../constants/colors";
@@ -46,7 +41,7 @@ const styles = StyleSheet.create({
     padding: 20,
   },
   image: {
-    maxWidth: "100%",
+    width: "100%",
     height: 200,
   },
   subTitle: {
