@@ -1,9 +1,16 @@
 import { create } from "apisauce";
 import cache from "../lib/cache";
+import auth from "../lib/auth";
 
 const api = create({
-  baseURL: "http://192.168.10.8:9000/api",
+  baseURL: "http://192.168.10.5:9000/api",
   timeout: 5000,
+});
+
+api.addAsyncRequestTransform(async (request) => {
+  const token = await auth.getToken();
+  if (!token) return;
+  request.headers!["x-auth-token"] = token;
 });
 
 const get = api.get;

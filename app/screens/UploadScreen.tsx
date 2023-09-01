@@ -3,9 +3,10 @@ import React from "react";
 import ProgressBar from "react-native-progress/Bar";
 import colors from "../constants/colors";
 import AnimatedLottieView from "lottie-react-native";
+import { ErrorMessage } from "../components/ui/forms";
 
 interface Props {
-  error?: boolean;
+  error?: boolean | string;
   progress: number;
   success?: boolean;
   visible: boolean;
@@ -42,14 +43,19 @@ export default function UploadScreen({
           />
         )}
         {error && (
-          <AnimatedLottieView
-            autoPlay
-            loop={false}
-            source={require("../../assets/animations/animation_llvykq0f.json")}
-            style={styles.errorAnim}
-            resizeMode="cover"
-            onAnimationFinish={onCompleted}
-          />
+          <>
+            <AnimatedLottieView
+              autoPlay
+              loop={false}
+              source={require("../../assets/animations/animation_llvykq0f.json")}
+              style={styles.errorAnim}
+              resizeMode="cover"
+              onAnimationFinish={onCompleted}
+            />
+            {typeof error === "string" && (
+              <ErrorMessage visible>{error}</ErrorMessage>
+            )}
+          </>
         )}
       </View>
     </Modal>

@@ -25,30 +25,32 @@ export default function ListingsScreen({ navigation }: ListingsScreenProps) {
   }, []);
 
   return (
-    <SafeScreen style={styles.screen}>
-      {error && (
-        <>
-          <BaseText style={styles.errorText}>Something went wrong.</BaseText>
-          <Button onPress={fetchListings}>Retry</Button>
-        </>
-      )}
+    <>
       <ActivityIndicator visible={loading} />
-      <FlatList
-        data={listings}
-        renderItem={({ item }) => (
-          <Card
-            imageUri={item.images[0].url}
-            title={item.title}
-            subTitle={"$" + item.price}
-            onPress={() =>
-              navigation.navigate(routes.LISTING_DETAILS, { item })
-            }
-          />
+      <SafeScreen style={styles.screen}>
+        {error && (
+          <>
+            <BaseText style={styles.errorText}>Something went wrong.</BaseText>
+            <Button onPress={fetchListings}>Retry</Button>
+          </>
         )}
-        keyExtractor={(item) => item.id.toString()}
-        contentContainerStyle={styles.listContent}
-      />
-    </SafeScreen>
+        <FlatList
+          data={listings}
+          renderItem={({ item }) => (
+            <Card
+              imageUri={item.images[0].url}
+              title={item.title}
+              subTitle={"$" + item.price}
+              onPress={() =>
+                navigation.navigate(routes.LISTING_DETAILS, { item })
+              }
+            />
+          )}
+          keyExtractor={(item) => item.id.toString()}
+          contentContainerStyle={styles.listContent}
+        />
+      </SafeScreen>
+    </>
   );
 }
 

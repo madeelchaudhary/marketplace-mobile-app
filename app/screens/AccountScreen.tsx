@@ -8,6 +8,7 @@ import { ListItemColumns, ListSeperator } from "../components/ui/lists";
 import SafeScreen from "../components/ui/safe-screen";
 import { AccountScreenProps } from "../navigation/AccountNavigator";
 import routes from "../navigation/routes";
+import { useAuth, useUser } from "../providers/auth";
 
 interface MenuItem {
   title: string;
@@ -37,12 +38,15 @@ const MENU_ITEMS: MenuItem[] = [
 ];
 
 export default function AccountScreen({ navigation }: AccountScreenProps) {
+  const auth = useAuth();
+  const user = auth.user;
+
   return (
     <SafeScreen style={styles.screen}>
       <View style={styles.container}>
         <ListItemColumns
-          title="Mosh Hamedani"
-          subTitle="something@example.com"
+          title={user?.name || "John Doe"}
+          subTitle={user?.email || "john@example.com"}
           image={require("../../assets/author.jpg")}
         />
       </View>
@@ -69,6 +73,7 @@ export default function AccountScreen({ navigation }: AccountScreenProps) {
         <ListItemColumns
           title="Log Out"
           IconComponent={<Icon name="logout" backgroundColor="#ffe66d" />}
+          onPress={auth.logout}
         />
       </View>
     </SafeScreen>

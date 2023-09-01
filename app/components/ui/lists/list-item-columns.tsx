@@ -7,6 +7,7 @@ import {
 } from "react-native";
 import React from "react";
 import { Swipeable } from "react-native-gesture-handler";
+import MaterialCommunityIcons from "@expo/vector-icons/MaterialCommunityIcons";
 
 import BaseText from "../base-text";
 import colors from "../../../constants/colors";
@@ -46,6 +47,11 @@ export default function ListItemColumns({
               </BaseText>
             )}
           </View>
+          <MaterialCommunityIcons
+            name="chevron-right"
+            size={25}
+            color={colors.neutral}
+          />
         </View>
       </TouchableHighlight>
     </Swipeable>
@@ -60,10 +66,12 @@ const styles = StyleSheet.create({
   },
   container: {
     flexDirection: "row",
+    alignItems: "center",
     gap: 10,
     padding: 15,
   },
   content: {
+    flex: 1,
     justifyContent: "center",
   },
   title: {

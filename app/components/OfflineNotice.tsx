@@ -2,7 +2,6 @@ import { StyleSheet, View, StatusBar } from "react-native";
 import React from "react";
 import { useNetInfo } from "@react-native-community/netinfo";
 
-import SafeScreen from "./ui/safe-screen";
 import colors from "../constants/colors";
 import BaseText from "./ui/base-text";
 
