@@ -10,7 +10,7 @@ interface User {
 }
 
 interface AuthContextType {
-  loading: boolean;
+  loading: boolean | null;
   user: User | null;
   login: (token: any) => void;
   logout: () => void;
@@ -27,7 +27,7 @@ const AuthContext = createContext<AuthContextType>(initialState);
 
 function AuthProvider({ children }: { children: React.ReactNode }) {
   const [user, setUser] = useState<AuthContextType["user"]>(null);
-  const [loading, setLoading] = useState<AuthContextType["loading"]>(true);
+  const [loading, setLoading] = useState<AuthContextType["loading"]>(null);
 
   useEffect(() => {
     setLoading(true);

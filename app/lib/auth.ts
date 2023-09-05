@@ -1,4 +1,5 @@
 import * as SecureStore from "expo-secure-store";
+import logger from "./logger";
 
 const KEY = "authToken";
 
@@ -6,7 +7,7 @@ const setToken = async (value: any) => {
   try {
     await SecureStore.setItemAsync(KEY, value);
   } catch (error) {
-    console.log(error);
+    if (error instanceof Error) logger.log(error);
   }
 };
 
@@ -16,7 +17,7 @@ const getToken = async () => {
     if (!value) return null;
     return value;
   } catch (error) {
-    console.log(error);
+    if (error instanceof Error) logger.log(error);
   }
 };
 
@@ -24,7 +25,7 @@ const removeToken = async () => {
   try {
     await SecureStore.deleteItemAsync(KEY);
   } catch (error) {
-    console.log(error);
+    if (error instanceof Error) logger.log(error);
   }
 };
 

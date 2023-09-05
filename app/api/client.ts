@@ -3,7 +3,7 @@ import cache from "../lib/cache";
 import auth from "../lib/auth";
 
 const api = create({
-  baseURL: "http://192.168.10.5:9000/api",
+  baseURL: "http://192.168.10.2:9000/api",
   timeout: 5000,
 });
 

@@ -1,5 +1,6 @@
 import React from "react";
 import * as Location from "expo-location";
+import logger from "../lib/logger";
 
 const useLocation = () => {
   const [location, setLocation] =
@@ -17,7 +18,7 @@ const useLocation = () => {
         setLocation({ latitude, longitude });
       }
     } catch (error) {
-      console.log(error);
+      if (error instanceof Error) logger.log(error);
     }
   };
 

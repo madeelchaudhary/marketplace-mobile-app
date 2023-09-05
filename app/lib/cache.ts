@@ -1,5 +1,6 @@
 import AsyncStore from "@react-native-async-storage/async-storage";
 import moment from "moment";
+import logger from "./logger";
 
 const PREFIX = "cache";
 const expiryInMinutes = 5;
@@ -12,7 +13,7 @@ const store = async (key: string, value: any) => {
   try {
     await AsyncStore.setItem(PREFIX + key, JSON.stringify(item));
   } catch (error) {
-    console.log(error);
+    if (error instanceof Error) logger.log(error);
   }
 };
 
@@ -33,7 +34,7 @@ const get = async (key: string) => {
     }
     return item.value;
   } catch (error) {
-    console.log(error);
+    if (error instanceof Error) logger.log(error);
   }
 };
 
@@ -41,7 +42,7 @@ const remove = async (key: string) => {
   try {
     await AsyncStore.removeItem(PREFIX + key);
   } catch (error) {
-    console.log(error);
+    if (error instanceof Error) logger.log(error);
   }
 };
 

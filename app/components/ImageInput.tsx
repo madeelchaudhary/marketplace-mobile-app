@@ -29,13 +29,12 @@ export default function ImageInput({
       });
       if (!result.canceled) onImageChange(result.assets[0]);
     } catch (error) {
-      console.log(error);
       alert("Error reading an image");
     }
   };
 
   useEffect(() => {
-    // requestPermission();
+    requestPermission();
   }, []);
 
   return (

@@ -11,6 +11,7 @@ import ListingEditScreen from "../screens/ListingEditScreen";
 import NewListingButton from "./newListingButton";
 import colors from "../constants/colors";
 import routes from "./routes";
+import useNotifications from "../hooks/useNotifications";
 
 interface TabParamList extends ParamListBase {
   [routes.FEED]: undefined;
@@ -30,6 +31,8 @@ export type ListingEditScreenProps = BottomTabScreenProps<
 const Tab = createBottomTabNavigator<TabParamList>();
 
 export default function AppNavigator() {
+  useNotifications();
+
   return (
     <Tab.Navigator
       screenOptions={{

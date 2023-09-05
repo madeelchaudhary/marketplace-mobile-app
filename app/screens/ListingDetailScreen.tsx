@@ -1,4 +1,9 @@
-import { StyleSheet, View } from "react-native";
+import {
+  StyleSheet,
+  View,
+  ScrollView,
+  KeyboardAvoidingView,
+} from "react-native";
 import { Image } from "expo-image";
 import React from "react";
 
@@ -6,6 +11,7 @@ import BaseText from "../components/ui/base-text";
 import colors from "../constants/colors";
 import { ListItemColumns } from "../components/ui/lists";
 import { ListingDetailScreenProps } from "../navigation/FeedNavigator";
+import ContactSellerForm from "../components/ContactSellerForm";
 
 export default function ListingDetailScreen({
   route,
@@ -14,31 +20,36 @@ export default function ListingDetailScreen({
   const { images, title, price } = item;
 
   return (
-    <View>
-      <Image
-        source={{
-          uri: images[0].url,
-        }}
-        style={styles.image}
-      />
-      <View style={styles.content}>
-        <BaseText style={styles.title}>{title}</BaseText>
-        <BaseText style={styles.subTitle}>${price}</BaseText>
-        <View style={styles.authorContainer}>
-          <ListItemColumns
-            image={require("../../assets/author.jpg")}
-            title="Mosh Hamedani"
-            subTitle="5 Listings"
+    <ScrollView style={{ flex: 1 }}>
+      <KeyboardAvoidingView behavior="position">
+        <View style={{ flex: 1 }}>
+          <Image
+            source={{
+              uri: images[0].url,
+            }}
+            style={styles.image}
           />
+          <View style={styles.content}>
+            <BaseText style={styles.title}>{title}</BaseText>
+            <BaseText style={styles.subTitle}>${price}</BaseText>
+            <View style={styles.authorContainer}>
+              <ListItemColumns
+                image={require("../../assets/author.jpg")}
+                title="Mosh Hamedani"
+                subTitle="5 Listings"
+              />
+              <ContactSellerForm listing={item} />
+            </View>
+          </View>
         </View>
-      </View>
-    </View>
+      </KeyboardAvoidingView>
+    </ScrollView>
   );
 }
 
 const styles = StyleSheet.create({
   authorContainer: {
-    marginVertical: 40,
+    marginVertical: 25,
   },
   content: {
     padding: 20,

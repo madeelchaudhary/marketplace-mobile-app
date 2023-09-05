@@ -47,7 +47,7 @@ export default function BaseInput({
       <TextInput
         placeholderTextColor={colors.neutral}
         {...inputProps}
-        style={style}
+        style={[style, { width: "100%" }]}
       />
     </View>
   );
@@ -61,6 +61,7 @@ const styles = StyleSheet.create({
     padding: 15,
     marginVertical: 5,
     gap: 10,
+    width: "100%",
   },
   icon: {
     alignSelf: "center",

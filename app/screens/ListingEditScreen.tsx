@@ -1,4 +1,9 @@
-import { StyleSheet, View } from "react-native";
+import {
+  StyleSheet,
+  ScrollView,
+  KeyboardAvoidingView,
+  View,
+} from "react-native";
 import * as Yup from "yup";
 
 import {
@@ -12,16 +17,14 @@ import SafeScreen from "../components/ui/safe-screen";
 import CategoryPickerItem from "../components/CategoryPickerItem";
 import { CategoryPickerItem as CategoryPickerItemType } from "../types/picker";
 import useLocation from "../hooks/useLocation";
-import { ImagePickerAsset } from "expo-image-picker";
 import { addListing } from "../api/listing";
-import useHttp from "../hooks/useHttp";
 import { useState } from "react";
 import UploadScreen from "./UploadScreen";
 
 const validationSchema = Yup.object().shape({
   title: Yup.string().required().min(1).label("Title"),
   price: Yup.number().required().min(1).max(10000).label("Price"),
-  description: Yup.string().label("Description"),
+  description: Yup.string().max(255).label("Description"),
   category: Yup.object().required().nonNullable().label("Category"),
   images: Yup.array().min(1, "Please select at least one image"),
 });
@@ -119,46 +122,53 @@ export default function ListingEditScreen() {
         error={error}
         success={success}
       />
-      <View style={styles.container}>
-        <Form
-          initialValues={{
-            title: "",
-            price: "",
-            description: "",
-            category: null,
-            images: [],
-          }}
-          onSubmit={handleFormSubmit as any}
-          validationSchema={validationSchema}
-        >
-          <FormImagePicker name="images" />
-          <FormField maxLength={255} name="title" placeholder="Title" />
-          <FormField
-            keyboardType="numeric"
-            maxLength={8}
-            name="price"
-            placeholder="Price"
-            width={120}
-          />
-          <FormPicker
-            numberOfColumns={3}
-            items={categories}
-            name="category"
-            placeholder="Category"
-            width="50%"
-            PickerItemComponent={CategoryPickerItem}
-          />
-          <FormField
-            maxLength={255}
-            multiline
-            name="description"
-            numberOfLines={3}
-            placeholder="Description"
-            style={{ verticalAlign: "top" }}
-          />
-          <SubmitButton>Post</SubmitButton>
-        </Form>
-      </View>
+      <ScrollView style={styles.full}>
+        <KeyboardAvoidingView behavior="padding">
+          <View style={[styles.container, styles.full]}>
+            <Form
+              initialValues={{
+                title: "",
+                price: "",
+                description: "",
+                category: null,
+                images: [],
+              }}
+              onSubmit={handleFormSubmit as any}
+              validationSchema={validationSchema}
+            >
+              <FormImagePicker name="images" />
+              <FormField maxLength={255} name="title" placeholder="Title" />
+              <FormField
+                keyboardType="numeric"
+                maxLength={8}
+                name="price"
+                placeholder="Price"
+                width={120}
+              />
+              <FormPicker
+                numberOfColumns={3}
+                items={categories}
+                name="category"
+                placeholder="Category"
+                width="50%"
+                PickerItemComponent={CategoryPickerItem}
+              />
+              <FormField
+                maxLength={255}
+                multiline
+                name="description"
+                numberOfLines={3}
+                placeholder="Description"
+                style={{
+                  verticalAlign: "top",
+                  maxHeight: 82,
+                }}
+              />
+              <SubmitButton>Post</SubmitButton>
+            </Form>
+          </View>
+        </KeyboardAvoidingView>
+      </ScrollView>
     </SafeScreen>
   );
 }
@@ -166,6 +176,9 @@ export default function ListingEditScreen() {
 const styles = StyleSheet.create({
   container: {
     gap: 10,
+  },
+  full: {
+    flex: 1,
   },
   screen: {
     padding: 15,

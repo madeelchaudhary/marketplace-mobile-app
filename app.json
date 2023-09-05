@@ -11,7 +11,9 @@
       "resizeMode": "cover",
       "backgroundColor": "#e63c4b"
     },
-    "assetBundlePatterns": ["**/*"],
+    "assetBundlePatterns": [
+      "**/*"
+    ],
     "ios": {
       "supportsTablet": true
     },
@@ -19,10 +21,21 @@
       "adaptiveIcon": {
         "foregroundImage": "./assets/adaptive-icon.png",
         "backgroundColor": "#ffffff"
-      }
+      },
+      "package": "com.marketplace.app",
+      "googleServicesFile": "./google-services.json"
     },
     "web": {
       "favicon": "./assets/favicon.png"
-    }
+    },
+    "extra": {
+      "eas": {
+        "projectId": "e7ae2bf9-f092-4e22-aa0f-35b8c5e813f9"
+      },
+      "bugsnag": {
+        "apiKey": "e4f574a322537d416afd4d72292d6be6"
+      }
+    },
+    "owner": "adeelch30ty"
   }
 }

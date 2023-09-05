@@ -8,7 +8,7 @@ import { ListItemColumns, ListSeperator } from "../components/ui/lists";
 import SafeScreen from "../components/ui/safe-screen";
 import { AccountScreenProps } from "../navigation/AccountNavigator";
 import routes from "../navigation/routes";
-import { useAuth, useUser } from "../providers/auth";
+import { useAuth } from "../providers/auth";
 
 interface MenuItem {
   title: string;
